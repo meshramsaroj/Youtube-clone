@@ -1,0 +1,27 @@
+{
+  "name": "youtube-clone-backend-service",
+  "version": "1.0.0",
+  "description": "This is backend service for youtube clone project",
+  "keywords": [
+    "Node",
+    "Express",
+    "MongoDB",
+    "Mongoose"
+  ],
+  "license": "ISC",
+  "author": "Saroj Meshram",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3"
+  }
+}

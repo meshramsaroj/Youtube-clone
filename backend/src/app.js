@@ -17,4 +17,10 @@ app.use(express.urlencoded({ limit: "16kb", extended: true })); // to read data 
 app.use(express.static("public")); // to store data in static folder
 app.use(cookieParser()); // to perform browser cookie data
 
+// route import 
+import userRoute from "./routes/user.route.js"
+
+// route declaration
+app.use('/api/v1/users', userRoute)
+
 export { app };

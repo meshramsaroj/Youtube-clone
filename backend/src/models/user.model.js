@@ -43,8 +43,6 @@ const userSchema = new mongoose.Schema(
     },
     refreshToken: {
       type: String,
-      required: true,
-      unique: true,
     },
   },
   { timestamps: true }
@@ -52,9 +50,10 @@ const userSchema = new mongoose.Schema(
 
 // create password in encrypted form on save
 userSchema.pre("save", async function (next) {
-  if (!this.isModified(this.password)) return next(); // if password is not modified then don't call below lines of code
-  this.password = bcrypt.hash(this.password, 10); // we replace existing password data with encrypted password which is done by bcrypt.hash method. this method works like (variable name, encryption key/ or round)
-  next();
+  if (!this.isModified("password")) return next;
+
+  this.password = await bcrypt.hash(this.password, 10);
+  next;
 });
 
 // check password whether it is correct or now by decrypting the same

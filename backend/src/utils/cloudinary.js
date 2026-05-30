@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
+import path from "path";
 
 // Cloudinary configuration
 cloudinary.config({
@@ -8,22 +9,24 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
-// Upload file 
+// Upload file
 const uploadFileOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) return null;
-    const response = await cloudinary.uploader.upload(localFilePath, {
-      resource_type:'auto',
-      unique_filename: true,
+    const absolutePath = path.resolve(localFilePath);
+
+    const response = await cloudinary.uploader.upload(absolutePath, {
+      resource_type: "auto",
     });
 
     console.log("File uploaded on cloudinary successfully.");
-
+    fs.unlinkSync(localFilePath);
     return response;
   } catch (error) {
-    fs.unlinkSync(localFilePath);
-    console.log("File upload failed!");
+    if (localFilePath && fs.existsSync(localFilePath)) {
+      fs.unlinkSync(localFilePath);
+    }
+    console.log("File upload failed!", error);
     return null;
   }
 };

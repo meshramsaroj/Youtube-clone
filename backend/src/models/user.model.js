@@ -63,7 +63,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 
 //generate access token
 userSchema.methods.generateAccessToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
       // data which needs to be send to token to access it on browser
       _id: this._id,
@@ -80,7 +80,7 @@ userSchema.methods.generateAccessToken = function () {
 
 // generate refresh token
 userSchema.methods.generateRefreshToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
       email: this.email,

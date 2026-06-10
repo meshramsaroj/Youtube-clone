@@ -1,6 +1,14 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/user.controller.js";
+import {
+  changePassword,
+  loginUser,
+  logoutUser,
+  refreshAccessToken,
+  registerUser,
+  updatedAvatarFile,
+} from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
+import { verifyJWTToken } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -18,8 +26,19 @@ router.route("/register").post(
   registerUser
 );
 
-router.route("/details").get((req, res) => {
-  return res.send("Ok");
+router.route("/login").post(loginUser);
+
+// secured route
+router.route("/logout").post(verifyJWTToken, logoutUser);
+router.route("/refresh-token").post(refreshAccessToken);
+router.route("/change-password").patch(verifyJWTToken, changePassword);
+router
+  .route("/update-avatar-image")
+  .post(verifyJWTToken, upload.single("avatar"), updatedAvatarFile);
+
+router.route("/test").get((req, res) => {
+  console.log("test route hit");
+  res.send("test route is working");
 });
 
 export default router;

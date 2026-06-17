@@ -30,3 +30,7 @@ Create a single script file in the user's chosen language that does all of the f
    - API key: YOUR_API_KEY
    - API secret: YOUR_API_SECRET
 
+Model link : https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj
+
+MongoDB atlas link: https://cloud.mongodb.com/v2/66e1901ed7d8c54d5a20478e#/explorer/66e1909e379e1a61a0172181/youtube_clone/users/find
+

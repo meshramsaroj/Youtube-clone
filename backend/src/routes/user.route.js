@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   changePassword,
   getCurrentUser,
+  getUserChannelProfile,
   loginUser,
   logoutUser,
   refreshAccessToken,
@@ -39,7 +40,8 @@ router
   .post(verifyJWTToken, upload.single("avatar"), updatedAvatarFile);
 
 router.route("/update-user").put(verifyJWTToken, updateUserDetails);
-router.route("/get-user-details").get(verifyJWTToken, getCurrentUser);
+router.route("/user-details").get(verifyJWTToken, getCurrentUser);
+router.route("/user-channel-profile").get(verifyJWTToken, getUserChannelProfile);
 
 router.route("/test").get((req, res) => {
   console.log("test route hit");

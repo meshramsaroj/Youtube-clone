@@ -4,6 +4,18 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+//  this is how we can set which are the origin urls we want to allow to access our backend server, we can set multiple urls in origin array and also we can set credentials true if we want to send cookie data to frontend server
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "http://localhost:5173", 
+//       "https://myapp.com"
+//     ],
+//     credentials: true
+//   })
+// );
+
 //Middleware
 app.use(
   cors({

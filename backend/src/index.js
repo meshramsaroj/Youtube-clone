@@ -2,6 +2,11 @@ import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 import { app } from "./app.js";
 
+import os from "os";
+
+let nodes = os.cpus().length;
+console.log("Number of CPU cores: ", nodes);
+
 dotenv.config({
   path: "./.env",
 });

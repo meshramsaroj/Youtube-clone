@@ -3,6 +3,7 @@ import {
   changePassword,
   getCurrentUser,
   getUserChannelProfile,
+  getUserWatchHistory,
   loginUser,
   logoutUser,
   refreshAccessToken,
@@ -41,7 +42,8 @@ router
 
 router.route("/update-user").put(verifyJWTToken, updateUserDetails);
 router.route("/user-details").get(verifyJWTToken, getCurrentUser);
-router.route("/user-channel-profile").get(verifyJWTToken, getUserChannelProfile);
+router.route("/user-channel-profile/:username").get(verifyJWTToken, getUserChannelProfile);
+router.route("/watch-history").get(verifyJWTToken, getUserWatchHistory)
 
 router.route("/test").get((req, res) => {
   console.log("test route hit");

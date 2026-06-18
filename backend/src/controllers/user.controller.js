@@ -163,8 +163,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
-      $set: {
-        refreshToken: undefined,
+      $unset: {
+        refreshToken: 1, //this removed the field document
       },
     },
     { new: true }
@@ -354,7 +354,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         },
         isSubscribed: {
           $cond: {
-            $if: { $in: [req.user?._id, "$subscribers.subscriber"] }, // we are checking user id is exist in subscriber array or not using $in operator
+            if: { $in: [req.user?._id, "$subscribers.subscriber"] }, // we are checking user id is exist in subscriber array or not using $in operator
             then: true,
             else: false,
           },
@@ -455,5 +455,5 @@ export {
   updateUserDetails,
   getCurrentUser,
   getUserChannelProfile,
-  getUserWatchHistory
+  getUserWatchHistory,
 };
